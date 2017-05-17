@@ -1,54 +1,37 @@
 package main.java;
 
-
 import java.util.ArrayList;
 
 public class Round {
-    private int roundId;
-    private Player currentPlayer;
-    private int numRetries;
 
-    public void setHiddenWord(ArrayList<Character> hiddenWord) {
-        this.hiddenWord = hiddenWord;
+    private ArrayList<Character> hiddenWOrd;
+    private FEStatus feStatus;
+
+    public Round(FEStatus feStatus) {
+        this.feStatus = feStatus;
     }
 
-    private ArrayList<Character> hiddenWord=new ArrayList<Character>();
-
-    public ArrayList<Character> getHiddenWord() {
-        return hiddenWord;
+    public ArrayList<Character> getHiddenWOrd() {
+        return hiddenWOrd;
     }
 
-    public Round(int roundId, Player currentPlayer, int numRetries) {
-        this.roundId = roundId;
-        this.currentPlayer = currentPlayer;
-        this.numRetries = numRetries;
+    public void setHiddenWOrd(ArrayList<Character> hiddenWOrd) {
+        this.hiddenWOrd = hiddenWOrd;
     }
 
-    public int getRoundId() {
-        return roundId;
+    public FEStatus getFeStatus() {
+        return feStatus;
     }
 
-    public void setRoundId(int roundId) {
-        this.roundId = roundId;
+    public void setFeStatus(FEStatus feStatus) {
+        this.feStatus = feStatus;
     }
 
-    public Player getCurrentPlayer() {
-        return currentPlayer;
+    public void letterBelongToHiddenWord(Character letter, ArrayList<Character> hiddenWOrd){
+
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public void verifyWord(String word, ArrayList<Character> hiddenWOrd){
+
     }
-
-    public int getNumRetries() {
-        return numRetries;
-    }
-
-    public void setNumRetries(int numRetires) {
-        this.numRetries = numRetires;
-    }
-
-
-
-
 }
