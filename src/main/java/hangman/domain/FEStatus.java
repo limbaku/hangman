@@ -1,4 +1,4 @@
-package main.java;
+package hangman.domain;
 
 import java.util.ArrayList;
 

@@ -1,22 +1,27 @@
-package main.java;
+package hangman.domain;
 
 import java.util.ArrayList;
 
 public class Round {
 
-    private ArrayList<Character> hiddenWOrd;
+    private String hiddenWord;
     private FEStatus feStatus;
+
+    public Round(String hiddenWord, FEStatus feStatus) {
+        this.hiddenWord = hiddenWord;
+        this.feStatus = feStatus;
+    }
 
     public Round(FEStatus feStatus) {
         this.feStatus = feStatus;
     }
 
-    public ArrayList<Character> getHiddenWOrd() {
-        return hiddenWOrd;
+    public String getHiddenWord() {
+        return hiddenWord;
     }
 
-    public void setHiddenWOrd(ArrayList<Character> hiddenWOrd) {
-        this.hiddenWOrd = hiddenWOrd;
+    public void setHiddenWOrd(String hiddenWord) {
+        this.hiddenWord = hiddenWord;
     }
 
     public FEStatus getFeStatus() {
@@ -31,7 +36,7 @@ public class Round {
 
     }
 
-    public void verifyWord(String word, ArrayList<Character> hiddenWOrd){
+    public void verifyWord(String word, String hiddenWOrd){
 
     }
 }
