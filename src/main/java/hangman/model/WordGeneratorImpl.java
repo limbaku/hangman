@@ -1,25 +1,28 @@
-package hangman.domain;
+package hangman.model;
+
+import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
-public class WordGenerator {
+@Component
+public class WordGeneratorImpl implements WordGenerator{
 
     private static final String[] dictionary = {
             "hello",
             "camera",
-            "rasperry",
+            "raspberry",
             "dress",
             "transformers",
-            "vueling",
+            "visitor",
             "fly",
             "alternate",
             "house",
             "dress",
-            "transformers",};
+            "transformation"};
 
     private static Random randomizer = new Random();
 
-    public static String nextWord() {
+    public String getNextWord() {
         return dictionary[randomizer.nextInt(dictionary.length)];
     }
 }
