@@ -24,6 +24,12 @@ public class RoundController {
     @Autowired
     WordGenerator wordGenerator;
 
+    @RequestMapping(path = "/", method = RequestMethod.GET)
+    public String index() {
+        return "index.html";
+
+    }
+
     @RequestMapping(path = "/round/", method = RequestMethod.GET)
     public ResponseEntity<Collection<FEStatus>> listAllRounds() {
 
@@ -52,6 +58,7 @@ public class RoundController {
         return new ResponseEntity<>(round.getFeStatus(),HttpStatus.OK);
     }
 
+    @CrossOrigin
     @RequestMapping(path = "/round/createRound", method = RequestMethod.POST)
     public ResponseEntity<FEStatus> createRound() {
 
@@ -91,7 +98,7 @@ public class RoundController {
         else {
 
             if (round.getHiddenWord().equals(word)) {
-                feStatus.setMessage("You found the hidden word");
+                feStatus.setMessage("You have found the hidden word");
             } else {
                 numLives = numLives - 1;
                 feStatus.setIntNumLives(numLives);
@@ -114,6 +121,7 @@ public class RoundController {
 
     }
 
+    @CrossOrigin
     @RequestMapping(path = "/round/verifyLetter/{key}", method = RequestMethod.PUT)
     public ResponseEntity<FEStatus> verifyLetter(@PathVariable String key,@RequestBody Map <String, String> map) {
         String letter = map.get("letter");
@@ -135,17 +143,15 @@ public class RoundController {
         else {
 
             if (round.getHiddenWord().contains(letter)) {
-                feStatus.setMessage("Updating the hidden word with the letter");
+                feStatus.setMessage("Hidden word updated including the letter");
                 updateOutput(round,letter);
-                //feStatus.setOutput(list);
 
             } else {
-                numLives = numLives - 1;
-                feStatus.setIntNumLives(numLives);
-
-                if (feStatus.getLettersUsed().contains(letter.charAt(0))) {
-                    feStatus.setMessage("You already used that letter");
+                if (feStatus.getLettersUsed().contains(letter)) {
+                    feStatus.setMessage("You have already used that letter");
                 } else {
+                    numLives = numLives - 1;
+                    feStatus.setIntNumLives(numLives);
                     feStatus.setMessage("You have lost a life but you can continue playing");
                     usedLetters.add(letter.charAt(0));
                 }
@@ -168,7 +174,6 @@ public class RoundController {
                 toArray();
         for (int i=0;i<intList.length;i++)
             round.getFeStatus().getOutput().set(intList[i],letter.charAt(0));
-
     }
 
     private ArrayList<Character> convertHiddenWord(String hiddenWord){

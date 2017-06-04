@@ -22,4 +22,6 @@ dependencies {
     }
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile("org.springframework.boot:spring-boot-starter-actuator")
+    testCompile ("org.spockframework:spock-spring:1.0-groovy-2.4")
+    testCompile ("org.springframework:spring-test:4.1.9.RELEASE")
 }

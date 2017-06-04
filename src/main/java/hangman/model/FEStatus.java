@@ -7,7 +7,7 @@ public class FEStatus {
 
     private final String roundId;
     private int intNumLives;
-    private final Set<Character> lettersUsed;
+    private Set<Character> lettersUsed;
     private final Set<String> wordsUsed;
     private final ArrayList<Character> output;
     private String message;
@@ -32,6 +32,10 @@ public class FEStatus {
 
     public void setIntNumLives(int intNumLives) {
         this.intNumLives = intNumLives;
+    }
+
+    public void setLettersUsed(Set<Character> lettersUsed) {
+        this.lettersUsed = lettersUsed;
     }
 
     public Set<Character> getLettersUsed() {
