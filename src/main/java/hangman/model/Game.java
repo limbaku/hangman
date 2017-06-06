@@ -1,12 +1,12 @@
 package hangman.model;
 
-public class Round {
+public class Game {
 
     private final FEStatus feStatus;
     private final String hiddenWord;
 
 
-    public Round(String hiddenWord, FEStatus feStatus) {
+    public Game(String hiddenWord, FEStatus feStatus) {
         this.hiddenWord = hiddenWord;
         this.feStatus = feStatus;
     }

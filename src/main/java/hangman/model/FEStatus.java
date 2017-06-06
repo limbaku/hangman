@@ -5,25 +5,22 @@ import java.util.Set;
 
 public class FEStatus {
 
-    private final String roundId;
+    private final String gameId;
     private int intNumLives;
     private Set<Character> lettersUsed;
-    private final Set<String> wordsUsed;
-    private final ArrayList<Character> output;
+    private ArrayList<Character> output;
     private String message;
 
-    public FEStatus(String roundId, int intNumLives, Set<Character> lettersUsed, Set<String> wordsUsed,
-                    ArrayList<Character> output, String message) {
-        this.roundId = roundId;
+    public FEStatus(String gameId, int intNumLives, Set<Character> lettersUsed, ArrayList<Character> output, String message) {
+        this.gameId = gameId;
         this.intNumLives = intNumLives;
         this.lettersUsed = lettersUsed;
-        this.wordsUsed = wordsUsed;
         this.output = output;
         this.message = message;
     }
 
-    public String getRoundId() {
-        return roundId;
+    public String getGameId() {
+        return gameId;
     }
 
     public int getIntNumLives() {
@@ -42,9 +39,7 @@ public class FEStatus {
         return lettersUsed;
     }
 
-    public Set<String> getWordsUsed() {
-        return wordsUsed;
-    }
+    public void setOutput(ArrayList<Character> output) {this.output = output;}
 
     public ArrayList<Character> getOutput() {
         return output;

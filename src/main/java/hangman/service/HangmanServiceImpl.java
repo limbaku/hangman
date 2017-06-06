@@ -1,6 +1,6 @@
 package hangman.service;
 
-import hangman.model.Round;
+import hangman.model.Game;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -9,27 +9,27 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class HangmanServiceImpl implements HangmanService {
 
-    private ConcurrentHashMap<String,Round> concurrentHashMap= new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String,Game> concurrentHashMap= new ConcurrentHashMap<>();
 
     @Override
-    public Collection<Round> findAllRounds() {
+    public Collection<Game> findAllGames() {
 
         return concurrentHashMap.values();
     }
 
     @Override
-    public Round findRoundById(String id) {
+    public Game findGameById(String id) {
         return concurrentHashMap.get(id);
     }
 
     @Override
-    public void createRound(Round round) {
-        concurrentHashMap.put(round.getFeStatus().getRoundId(),round);
+    public void createGame(Game game) {
+        concurrentHashMap.put(game.getFeStatus().getGameId(),game);
     }
 
     @Override
-    public void updateRound(String id, Round round) {
-        concurrentHashMap.put(id,round);
+    public void updateGame(String id, Game game) {
+        concurrentHashMap.put(id,game);
     }
 
 }
