@@ -34,7 +34,7 @@ public class GameController {
     }
 
     @CrossOrigin
-    @RequestMapping(path = "/games/", method = RequestMethod.GET)
+    @RequestMapping(path = "/game/", method = RequestMethod.GET)
     public ResponseEntity<Collection<FEStatus>> getAllGames() {
 
         Collection<Game> vacationRentals = hangmanService.findAllGames();
@@ -47,7 +47,7 @@ public class GameController {
     }
 
     @CrossOrigin
-    @RequestMapping(path = "/games/{key}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/game/{key}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FEStatus> getGame(@PathVariable String key) {
 
         Game game = hangmanService.findGameById(key);
@@ -60,7 +60,7 @@ public class GameController {
     }
 
     @CrossOrigin
-    @RequestMapping(path = "/games", method = RequestMethod.POST)
+    @RequestMapping(path = "/game", method = RequestMethod.POST)
     public ResponseEntity<FEStatus> createGame() {
 
         String hiddenWord = wordGenerator.getNextWord();
@@ -81,18 +81,18 @@ public class GameController {
     }
 
     @CrossOrigin
-    @RequestMapping(path = "/games/{key}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/game/{key}", method = RequestMethod.PUT)
     public ResponseEntity<FEStatus> verifyLetter(@PathVariable String key,@RequestBody Map <String, String> map) {
         String letter = map.get("letter");
         Game game = hangmanService.findGameById(key);
 
-        if (game == null){
+        if ((game == null) || (key == null)){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         FEStatus feStatus = game.getFeStatus();
 
-        if(!isNumber(letter)) {
+        if(!isNumber(letter) && (letter != null) && (!letter.isEmpty())) {
 
             Set<Character> usedLetters = feStatus.getLettersUsed();
 
@@ -115,12 +115,11 @@ public class GameController {
                         feStatus.setMessage("You have lost a life but you can continue playing");
                         usedLetters.add(letter.charAt(0));
                     }
-                }
 
-                if (numLives == 0) {
-                    feStatus.setMessage("Game Over: You have lost all your lives. Hidden word was: " + game.getHiddenWord());
+                    if (numLives == 0) {
+                        feStatus.setMessage("Game Over: You have lost all your lives. Hidden word was: " + game.getHiddenWord());
+                    }
                 }
-
                 hangmanService.updateGame(key, game);
             }
         }
@@ -134,7 +133,8 @@ public class GameController {
     private void verifyWord(ArrayList<Character> hiddenWord,Game game){
 
         if (hiddenWord.equals(game.getFeStatus().getOutput())){
-            game.getFeStatus().setMessage("Yipe!! You have found the hidden word");
+            game.getFeStatus().setMessage("Yippe!! You have found the hidden word");
+            game.getFeStatus().setIntNumLives(0);
         }
     }
 

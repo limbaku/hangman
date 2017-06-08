@@ -18,7 +18,18 @@ public class WordGeneratorImpl implements WordGenerator{
             "alternate",
             "house",
             "dress",
-            "transformation"};
+            "transformation",
+            "laptop",
+            "swim",
+            "running",
+            "strawberry",
+            "trip",
+            "beach",
+            "mountain",
+            "music",
+            "aubergine",
+            "eye",
+            "smile"};
 
     private static Random randomizer = new Random();
 

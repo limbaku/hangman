@@ -97,7 +97,7 @@ class GameControllerTest extends Specification {
         game.getFeStatus().message.equals("You have already used that letter")
     }
 
-    def "Test VerifyWord when you guess last letter of hidden word"() {
+    def "Test VerifyWord when you win a game"() {
         given:
         def game = createGame("camera",2)
         def output = new ArrayList<>()
@@ -116,8 +116,8 @@ class GameControllerTest extends Specification {
         def response = gameController.verifyLetter(game.getFeStatus().getGameId(),map)
         then:
         response.statusCode.equals(HttpStatus.OK)
-        game.getFeStatus().getIntNumLives() == 2
-        game.getFeStatus().message.equals("Yipe!! You have found the hidden word")
+        game.getFeStatus().getIntNumLives() == 0
+        game.getFeStatus().message.equals("Yippe!! You have found the hidden word")
     }
 
     def "Test VerifyWord when you fail guessing and do not have more lives"() {
